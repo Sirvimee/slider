@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="stiil.css">
+</head>
+		
+<body>
+
+<div class="container1">
+	<div>
+		<p><strong style="color: #009933; font-size: 30px;">Arvuta, palju raha tagasi saad:</strong></p>
+		<br>
+		<p style="color: #000000; font-size: 14px;">Sinu igakuised ostud (€):</p>
+		<input type="range" min="0" max="1000" value="0" class="slider" id="myRange">
+ 		<output id="demo">0</output>
+	<br>
+		<div class="tulem">
+		<p style="color: #000000; font-size: 14px;">Raha tagasi, kuus (€):&nbsp;<span id="demo2">20.82</span></p>
+		</div>
+		<div class="tulem">
+		<p style="color: #000000; font-size: 14px;">Raha tagasi, aastas (€):&nbsp;<span id="demo3">249.84</span></p>
+		</div>	
+		<script>
+			const rangeInputs = document.querySelectorAll('input[type="range"]')
+			const numberInput = document.querySelector('input[type="number"]')
+
+			function handleInputChange(e) {
+				let target = e.target
+					if (e.target.type !== 'range') {
+					target = document.getElementById('range')
+				} 
+				const min = target.min
+				const max = target.max
+				const val = target.value
+				target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+			}
+
+			rangeInputs.forEach(input => {
+			input.addEventListener('input', handleInputChange)
+			})
+
+			var slider1 = document.getElementById("myRange");
+			var demo = document.getElementById("demo");
+			var demo2 = document.getElementById("demo2");
+			var demo3 = document.getElementById("demo3");
+			demo.innerHTML = slider1.value;
+			demo2.innerHTML = 0;
+			demo3.innerHTML = 0;
+			slider1.oninput = function() {
+				if (this.value < 250) {
+					demo.innerHTML = this.value;
+					demo2.innerHTML = this.value / 100;
+					demo3.innerHTML = Math.round(((this.value / 100) * 12)*100)/100;
+				} else if (this.value >= 250 && this.value < 400) {
+					demo.innerHTML = this.value;
+					demo2.innerHTML = (this.value * 2) / 100;
+					demo3.innerHTML = Math.round((((this.value * 2) / 100) * 12)*100)/100;
+				} else {
+					demo.innerHTML = this.value;
+					demo2.innerHTML = (this.value * 3) / 100;
+					demo3.innerHTML = Math.round((((this.value * 3) / 100) * 12)*100)/100;
+				}
+			}
+		</script>
+	</div>
+
+</div>
+<br>
+<div class="container2">
+	<br>
+  	<p><strong style="color: #ffffff; font-size: 18px;">Tasemed on järgmised:</strong></p> 
+	<br>
+  		<table id="tabel">
+    		<thead>
+      			<tr>
+        			<th>Oste kuus / eurot</th>
+        			<th>Tase</th>
+      			</tr>
+    		</thead>
+    		<tbody>
+      			<tr>
+        			<td>al esimesest sendist</td>
+        			<td>1%</td>
+      			</tr>
+      			<tr>
+        			<td>al 250 eurost</td>
+        			<td>2%</td>
+      			</tr>
+      			<tr>
+        			<td>al 400 eurost</td>
+        			<td>3%</td>
+      			</tr>
+    		</tbody>
+  		</table>
+	<br>
+	<br>
+</div>
+
+</body>
+</html>
